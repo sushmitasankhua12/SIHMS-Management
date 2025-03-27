@@ -23,10 +23,10 @@ public interface AssignHomeworkRepository extends JpaRepository<AssignHomework, 
 			+ "ORDER BY AH.HOMEWORK_ID DESC" , nativeQuery = true)
 	List<Object[]> getasignhomework(Integer classNo, Long studentId);
 	
-	@Query(value = "SELECT CD.CLASSNAME,SI.STUDENTNAME,SA.HOMEWORK CL,SA.DUE_DATE FROM TBL_SIHMS_ASIGN_HOMEWORK SA\r\n"
+	@Query(value = "SELECT CD.CLASSNAME,SI.STUDENTNAME,SA.HOMEWORK ,TO_CHAR(SA.DUE_DATE,'DD-MON-YYYY') FROM TBL_SIHMS_ASIGN_HOMEWORK SA\r\n"
 			+ "LEFT JOIN TBL_SIHMS_CLASSDETAILS CD ON SA.CLASSNO=CD.CLASSID\r\n"
 			+ "LEFT JOIN TBL_SIHMS_STUDENTINFO SI ON SI.STUDENTID = SA.STUDENT_ID\r\n"
-			+ "WHERE SI.USERID = ?1 AND SA.DUE_DATE >= TRUNC(SYSDATE)" , nativeQuery = true)
+			+ "WHERE SI.USERID = ?1 AND SA.DUE_DATE >= TRUNC(SYSDATE) ORDER BY SA.DUE_DATE" , nativeQuery = true)
 	List<Object[]> getasignedhomework(Long studentId);
 
 }

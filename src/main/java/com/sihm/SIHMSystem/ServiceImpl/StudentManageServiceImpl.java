@@ -322,9 +322,9 @@ public class StudentManageServiceImpl implements StudentManageService {
 			for(Object[] obj : homeworkarr) {
 				Map<String,Object> map = new HashMap<>();
 				map.put("class", obj[0]);
-				map.put("date", obj[1]);
-				map.put("fromtime", obj[2]);
-				map.put("totime", obj[3]);
+				map.put("student", obj[1]);
+				map.put("homework", obj[2]);
+				map.put("duedate", obj[3]);
 				homeworklist.add(map);
 			}
 			

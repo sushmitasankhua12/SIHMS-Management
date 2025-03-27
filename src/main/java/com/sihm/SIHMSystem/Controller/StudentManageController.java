@@ -3,6 +3,7 @@
  */
 package com.sihm.SIHMSystem.Controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,7 @@ public class StudentManageController {
 	private StudentManageService studentmanageserv;
 	
 	@PostMapping(value = "/addstudent")
-	@ResponseBody
-	public Response addstudent(StudentInfo studentinfo) {
+	public Response addstudent(@RequestBody StudentInfo studentinfo) {
 		Response response = new Response();
 		try {
 			response = studentmanageserv.addstudent(studentinfo);
@@ -47,7 +47,6 @@ public class StudentManageController {
 	}
 	
 	@GetMapping(value = "/getClassroom")
-	@ResponseBody
 	public Response getClassroom() {
 		Response response = new Response();
 		try {
@@ -59,7 +58,6 @@ public class StudentManageController {
 	}
 	
 	@GetMapping(value = "/getClassroomdetails")
-	@ResponseBody
 	public Response getClassroomdetails() {
 		Response response = new Response();
 		try {
@@ -71,7 +69,6 @@ public class StudentManageController {
 	}
 	
 	@GetMapping(value = "/getstudentdata")
-	@ResponseBody
 	public Response getstudentdata(@RequestParam(value = "classNo" , required = false) Integer classNo) {
 		Response response = new Response();
 		try {
@@ -139,5 +136,29 @@ public class StudentManageController {
 		}
 		return response;
 	}
+	
+	@GetMapping(value = "/getstudentdatafordashbord")
+	@ResponseBody
+	public Map<String,Object> getstudentdatafordashbord(@RequestParam(value = "userId" , required = false) Long userId) {
+		Map<String,Object> response=new HashMap<>();
+		try {			
+			response = studentmanageserv.getstudentdatafordashbord(userId);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	@GetMapping(value = "/getteacherdata")
+	public Map<String,Object> getteacherdata() {
+		Map<String,Object> response=new HashMap<>();
+		try {			
+			response = studentmanageserv.getteacherdata();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return response;
+	}
+
 	
 }

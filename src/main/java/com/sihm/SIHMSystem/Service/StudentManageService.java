@@ -1,5 +1,7 @@
 package com.sihm.SIHMSystem.Service;
 
+import java.util.Map;
+
 import com.sihm.SIHMSystem.Bean.BeanClass;
 import com.sihm.SIHMSystem.Bean.Response;
 import com.sihm.SIHMSystem.Model.AssignHomework;
@@ -24,5 +26,9 @@ public interface StudentManageService {
 	Response asignindividulahomework(AssignHomework assignhomework) throws Exception;
 
 	Response getasignhomework(AssignHomework assignhomework) throws Exception;
+
+	Map<String, Object> getstudentdatafordashbord(Long userId) throws Exception;
+
+	Map<String, Object> getteacherdata() throws Exception;
 
 }

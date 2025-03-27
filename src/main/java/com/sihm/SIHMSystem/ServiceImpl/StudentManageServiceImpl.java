@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +29,7 @@ import com.sihm.SIHMSystem.Repository.ScheduleClassRequestRepository;
 import com.sihm.SIHMSystem.Repository.StudentInfoRepository;
 import com.sihm.SIHMSystem.Repository.UserdetailsRepository;
 import com.sihm.SIHMSystem.Service.StudentManageService;
+import com.sihm.SIHMSystem.util.CustomCheckedException;
 
 /**
  * Rajendra
@@ -61,23 +63,31 @@ public class StudentManageServiceImpl implements StudentManageService {
 	public Response addstudent(StudentInfo studentinfo) throws Exception {
 		Response response = new Response();
 		try {
-			Userdetails userdetails = new Userdetails();			
-			userdetails.setUsername(null);
-			userdetails.setEmail(studentinfo.getMailId());
-			userdetails.setFullName(studentinfo.getStudentName());
-			userdetails.setGroupId(2);
-			userdetails.setPassWord(passwordEncoder.encode("SIHMS@123"));
-			userdetails.setMobile(studentinfo.getPhoneNo());
-			userdetails.setCreatedOn(new Date());
-			userdetails.setStatusFlag(0);
-			userdetails = userdetailsrepo.save(userdetails);
-			
-			studentinfo.setStatusFlag(0);
-			studentinfo.setCreatedOn(new Date());
-			studentinfo.setUserId(userdetails.getUserId());
-			studentinforepo.save(studentinfo);
-			
-			commenserv.creditionalmail(userdetails.getUsername(),"SIHMS@123",studentinfo);
+			Integer usernamecheck=1;
+			String username="";
+			while(usernamecheck!=0) {
+				username=StudentManageServiceImpl.getusername(studentinfo.getStudentName().trim());
+				usernamecheck=userdetailsrepo.usernamecheck(username.trim());
+			}
+			if(usernamecheck==0) {
+				Userdetails userdetails = new Userdetails();			
+				userdetails.setUsername(username);
+				userdetails.setEmail(studentinfo.getMailId());
+				userdetails.setFullName(studentinfo.getStudentName());
+				userdetails.setGroupId(2);
+				userdetails.setPassWord(passwordEncoder.encode("SIHMS@123"));
+				userdetails.setMobile(studentinfo.getPhoneNo());
+				userdetails.setCreatedOn(new Date());
+				userdetails.setStatusFlag(0);
+				userdetails = userdetailsrepo.save(userdetails);
+				
+				studentinfo.setStatusFlag(0);
+				studentinfo.setCreatedOn(new Date());
+				studentinfo.setUserId(userdetails.getUserId());
+				studentinforepo.save(studentinfo);
+				
+				commenserv.creditionalmail(userdetails.getUsername(),"SIHMS@123",studentinfo);
+			}
 			
 			response.setStatus(200);
 			response.setMessage("success");
@@ -290,6 +300,88 @@ public class StudentManageServiceImpl implements StudentManageService {
 			throw new Exception(e);
 		}
 		return response;
+	}
+
+	@Override
+	public Map<String, Object> getstudentdatafordashbord(Long userId) throws Exception {
+		Map<String,Object> response=new HashMap<>();
+		List<Object> scheduleclslist = new ArrayList<>();
+		List<Object> homeworklist = new ArrayList<>();
+		try {			
+			List<Object[]> schedulearr =  scheduleClassrepo.gettodayscheduleclassforstudent(userId);
+			for(Object[] obj : schedulearr) {
+				Map<String,Object> map = new HashMap<>();
+				map.put("class", obj[0]);
+				map.put("date", obj[1]);
+				map.put("fromtime", obj[2]);
+				map.put("totime", obj[3]);
+				scheduleclslist.add(map);
+			}
+			
+			List<Object[]> homeworkarr =  assignhomeworkrepo.getasignedhomework(userId);
+			for(Object[] obj : homeworkarr) {
+				Map<String,Object> map = new HashMap<>();
+				map.put("class", obj[0]);
+				map.put("date", obj[1]);
+				map.put("fromtime", obj[2]);
+				map.put("totime", obj[3]);
+				homeworklist.add(map);
+			}
+			
+			response.put("status",200);
+			response.put("message","Success");
+			response.put("classdata",scheduleclslist);	
+			response.put("homeworkdata",homeworklist);	
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+		return response;
+	}
+
+	@Override
+	public Map<String, Object> getteacherdata() throws Exception {
+		Map<String,Object> response=new HashMap<>();
+		List<Object> scheduleclslist = new ArrayList<>();
+		try {			
+			List<Object[]> schedulearr =  scheduleClassrepo.gettodayscheduleclass();
+			for(Object[] obj : schedulearr) {
+				Map<String,Object> map = new HashMap<>();
+				map.put("class", obj[0]);
+				map.put("date", obj[1]);
+				map.put("fromtime", obj[2]);
+				map.put("totime", obj[3]);
+				scheduleclslist.add(map);
+			}
+			response.put("status",200);
+			response.put("message","Success");
+			response.put("classdata",scheduleclslist);	
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
+		return response;
+	}
+	
+	public static String getusername(String name) throws CustomCheckedException{
+		String username="";
+		try {
+			String prifix=name.substring(0,3).toUpperCase();
+			String randon2digit=String.format("%02d", new Random().nextInt(100));
+			String randon3digit=String.format("%03d", new Random().nextInt(1000));
+			String[] chararArray = {
+		            "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", 
+		            "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", 
+		            "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", 
+		            "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", 
+		            "S", "T", "U", "V", "W", "X", "Y", "Z"
+		        };
+	        String char1 = chararArray[new Random().nextInt(51)];
+	        String char2 = chararArray[new Random().nextInt(51)];
+	        String randomChars =char1 + char2;	        
+			username=prifix+randon2digit+randomChars+randon3digit;
+		}catch (Exception e) {
+			throw new CustomCheckedException("Error In Create username : "+e.getMessage());
+		}
+		return username;
 	}
 
 }

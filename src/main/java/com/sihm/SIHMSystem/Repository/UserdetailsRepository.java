@@ -20,4 +20,7 @@ public interface UserdetailsRepository extends JpaRepository<Userdetails, Long> 
 	@Query("from Userdetails where email=:username and statusFlag=0")
 	Userdetails findBymobile(String username);
 
+	@Query("select count(*) from Userdetails where username=:username")
+	Integer usernamecheck(String username);
+
 }

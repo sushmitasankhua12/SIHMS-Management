@@ -1,6 +1,7 @@
 package com.sihm.SIHMSystem.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class CommonController {
 		try {
 			commenserv.rqstforcontact();
 		}catch (Exception e) {
+			HttpStatus
 			e.printStackTrace();
 		}
 	}	

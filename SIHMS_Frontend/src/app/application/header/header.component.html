@@ -1,0 +1,164 @@
+<header class="fixed-header">
+  <nav>
+    <div class="header-left">
+      <img src="../../assets/img/logo.png" alt="Logo" class="logo">
+      <div class="project-title">
+        <h1>SIHMS</h1>
+        <span>Student Information & Homework Management System</span>
+      </div>
+    </div>
+  </nav>
+  <div class="header-right">
+    <div class="profile-dropdown" *ngIf="this?.user?.groupId == 1">
+      <i class="bi bi-list"></i>
+      <div class="dropdown-list example-container" style="width: 300px; height: 150px;">
+        <div class="notification-item">
+          <i class="bi bi-people-fill" ></i>
+          <p routerLink="/application/Studentmanage">Student Data</p>
+        </div>
+        <div class="notification-item">
+          <i class="bi bi-book-half" ></i>
+          <p routerLink="/application/assignHomework">Homework / Assignments</p>
+        </div>
+        <div class="notification-item">
+          <i class="bi bi-clock-history" ></i>
+          <p routerLink="/application/scheduleclass">Schedule Class</p>
+        </div>
+        <!-- <div class="notification-item">
+          <i class="bi bi-bar-chart-fill" ></i>
+          <p routerLink="/application/progresstrack">Progress Track</p>
+          <p >Progress Track</p>
+        </div> -->
+      </div>
+    </div>
+    <i class="bi bi-house-door" routerLink="/application/facaultiDashbord" title="Dashboard"></i>
+    <i class="bi bi-reply-fill" (click)="back()" title="Click to go back"></i>
+    <!-- //notification -->
+    <div class="profile-dropdown">
+      <i class="bi bi-bell"></i>
+      <div class="dropdown-list example-container">
+        <p style="font-weight: bold; text-align: center; background-color: #dfd9d9;">Notification</p>
+        <hr>
+        <ng-container *ngFor="let item of notifications">
+          <div class="notification-item">
+            <i class="bi bi-bell"></i>
+            <p>{{ item?.message }}</p>
+          </div>
+          <hr>
+        </ng-container>
+      </div>
+    </div>
+    <!-- //Setting -->
+    <!-- <div class="profile-dropdown">
+      <i class="bi bi-gear"></i>
+      <div class="dropdown-sett">
+        <div class="notification-item">
+          <i class="bi bi-cpu"></i>
+          <p>Updated<br>
+            Version 1.0.1
+          </p>
+        </div>
+        <hr>
+        <div class="notification-item">
+          <i class="bi bi-shield-check"></i>
+          <p>Privacy policy<br>
+            2024
+          </p>
+        </div>
+        <hr>
+        <div class="notification-item">
+          <i class="bi bi-c-circle"></i>
+          <p>Copyright Policy<br>2024</p>
+        </div>
+        <hr>
+      </div>
+    </div> -->
+    <!-- //profile -->
+    <div class="profile-dropdown">
+      <i class="bi bi-person-circle"></i>
+      <div class="dropdown-menu">
+        <a (click)="changePassword()">Change Password</a>
+      </div>
+    </div>
+    <div class="profile-dropdown">
+      <i class="bi bi-box-arrow-right" title="Logout"></i>
+      <div class="dropdown-menu">
+        <a (click)="logout()" data-bs-toggle="modal" data-bs-target="#userprofile">Logout</a>
+        <a (click)="referesh()">Referesh</a>
+      </div>
+    </div>
+    <!-- <i class="bi bi-box-arrow-right" (click)="logout()" title="Logout"></i> -->
+  </div>
+</header>
+
+
+<div class="modal" id="changepassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="backdrop-filter: blur(10px); ">
+  <div class="modal-dialog" style="max-width: 40%; margin-top: 100px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="font-weight: 500;color: #388087">Change Password</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closemodal()"></button>
+      </div>
+      <div class="modal-body container text-center">
+        <div class="row">
+          <div class="col-lg-12 col-xxl-12" style="margin-left: 1ch;text-align: left;"
+            *ngIf="!sentotp">
+            <p style="margin-top: -1ch;">Your new password must be at least <span style="color: #8f0505;">8 characters</span> long and include:</p>
+            <p style="margin-top: -2ch; margin-left: 1ch;">* At least one uppercase letter <span style="color: #8f0505;">(A-Z)</span></p>
+            <p style="margin-top: -2ch; margin-left: 1ch;">* At least one lowercase letter <span style="color: #8f0505;">(a-z)</span></p>
+            <p style="margin-top: -2ch; margin-left: 1ch;">* At least one number <span style="color: #8f0505;">(0-9)</span></p>
+            <p style="margin-top: -2ch; margin-left: 1ch;">* At least one special character <span style="color: #8f0505;">(e.g., @, #, $)</span>"</p>
+            <p style="margin-top: -2ch;">🔒 For your security, avoid using easily guessed words like your name or birthdate.</p>
+          </div>
+          <div class="col-lg-5 col-xxl-5 mt-1 ">
+            <div class="mb-xl-3">
+              <label class="form-label">Enter New Paasword<span class="text-danger">*</span></label>
+            </div>
+          </div>
+          <div class="col-lg-7 col-xxl-7">
+            <input class="form-control" type="text" placeholder="Enter New Paasword" autocomplete="off" id="newpass"
+            maxlength="15" onkeyup="this.value=this.value.replace(/[^a-zA-Z0-9@#&]/g,'');" [disabled]="sentotp" >
+          </div>
+          <div class="col-lg-5 col-xxl-5 mt-1">
+            <div class="mb-xl-3">
+              <label class="form-label">Enter Confirm Paasword<span class="text-danger">*</span></label>
+            </div>
+          </div>
+          <div class="col-lg-7 col-xxl-7">
+            <div class="mb-xl-3">
+              <input class="form-control" type="text" placeholder="Enter New Paasword" autocomplete="off" id="cnfpass"
+                maxlength="15" onkeyup="this.value=this.value.replace(/[^a-zA-Z0-9@#&]/g,'');" [disabled]="sentotp">
+            </div>
+          </div>
+          <ng-container *ngIf="sentotp">
+            <div class="col-lg-1 col-xxl-1"></div>
+            <div class="col-lg-3 col-xxl-3 mt-2">
+              <p class="paydata color1">Enter OTP : </p>
+            </div>
+            <div class="col-lg-6 col-xxl-6 mt-2">
+              <input class="form-control" type="text" placeholder="Enter here..." autocomplete="off" id="otpval"
+                maxlength="6" onkeyup="this.value=this.value.replace(/[^0-9. ]/g,'');">
+            </div>
+            <div class="col-lg-2 col-xxl-2"></div>
+          </ng-container>
+          <div class="col-lg-12 col-xxl-12" style="margin-left: 1ch; margin-top: 1ch; text-align: left;"
+            *ngIf="sentotp">
+            <p>* We've sent an OTP to your registered email ID.</p>
+            <!-- <p style="margin-top: -1ch;">* An OTP has also been sent to your registered ****6789 mobile number.</p> -->
+            <p style="margin-top: -1ch;">* You have {{attemptcount}} attempts remaining to verify your account.</p>
+          </div>
+          <div class="col-lg-12 col-xxl-12 mt-4" *ngIf="!sentotp">
+            <button class="btn btn-success w-50 me-2" (click)="sendOTP()">Send OTP</button>
+          </div>
+          <div class="col-lg-12 col-xxl-12 mt-4 d-flex justify-content-center" *ngIf="sentotp">
+            <button class="btn btn-primary mx-2" style="width: 120px;" (click)="sendOTP()">Re-Send</button>
+            <button class="btn btn-success mx-2" style="width: 120px;" (click)="verifyOTP()">Verify</button>
+            <button class="btn btn-warning mx-2" style="width: 120px;" (click)="closemodal()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

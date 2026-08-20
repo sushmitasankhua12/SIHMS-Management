@@ -1,0 +1,113 @@
+.content {
+  padding-top: 60px; /* Same height as the header */
+  padding-left: 30px; /* Same height as the header */
+  padding-right: 10px; /* Same height as the header */
+  background-color: #FFFBEE;
+}
+
+/* Card Styling */
+.card-container {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 5px 10px 0 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Icon */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: #a82323;
+  color: white;
+  border-radius: 50%;
+  font-size: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.content1 h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #a82323;
+  transition: all 0.3s ease-in-out;
+}
+
+.content1 p {
+  font-size: 16px;
+  color: gray;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Right Side Arrow */
+.arrow {
+  color: #a82323;
+  font-size: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.card-container:hover {
+  background-color: #a82323;
+  transform: scale(1.05);
+}
+
+.card-container:hover .icon {
+  background-color: white;
+  color: #a82323;
+}
+
+.content1 {
+  margin-left: 20px;
+  flex-grow: 1;
+}
+
+.card-container:hover .content1 h2,
+.card-container:hover .content1 p,
+.card-container:hover .arrow {
+  color: white;
+}
+
+.table-container {
+  width: 100%;
+  padding: 5px;
+  background-color: #f5f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 3ch;
+}
+
+.custom-table {
+  width: 100%;
+  border-collapse: separate; /* Allows border-spacing to work */
+  border-spacing: 10px; /* Adds space between the cells */
+  font-family: Arial, sans-serif;
+}
+
+.custom-table th {
+  background-color: #f07d3b;
+  color: white;
+  border-radius: 5px 20px 5px 20px;
+}
+
+.custom-table th, .custom-table td {
+  padding: 5px;
+  text-align: center;
+}
+
+.custom-table i{
+  font-size: 20px;
+}
+
+.custom-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.custom-table tbody tr:hover {
+  background-color: #e0e0e0;
+}

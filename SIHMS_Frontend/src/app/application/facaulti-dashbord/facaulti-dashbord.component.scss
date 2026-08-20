@@ -1,0 +1,194 @@
+
+.content {
+  padding-top: 60px; /* Same height as the header */
+  padding-left: 20px; /* Same height as the header */
+  padding-right: 10px; /* Same height as the header */
+  // background-color: #FFFBEE;
+}
+
+.watermark {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../../../assets/img/logo.png) repeat center center;
+  background-size: cover; /* Cover the entire page */
+  opacity: 0.1; /* Adjust transparency */
+  z-index: -1; /* Place it behind other content */
+  pointer-events: none; /* Prevent interaction */
+}
+
+.card-container {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 5px 10px 5px 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Icon */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: #a82323;
+  color: white;
+  border-radius: 50%;
+  font-size: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+.content1 h2 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #a82323;
+  transition: all 0.3s ease-in-out;
+}
+
+.content1 p {
+  font-size: 16px;
+  color: gray;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Right Side Arrow */
+.arrow {
+  color: #a82323;
+  font-size: 24px;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.card-container:hover {
+  background-color: #a82323;
+  transform: scale(1.05);
+}
+
+.card-container:hover .icon {
+  background-color: white;
+  color: #a82323;
+}
+
+.content1 {
+  margin-left: 20px;
+  flex-grow: 1;
+}
+
+.card-container:hover .content1 h2,
+.card-container:hover .content1 p,
+.card-container:hover .arrow {
+  color: white;
+}
+
+.titel{
+  font-weight: 500;
+  font-size:24px;
+  text-align: center;
+  margin-top: 2ch;
+  background: #e6e4e4;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.vertical-line {
+  width: 2px;
+  height: 100%;
+  background-color: #ccc;
+  margin: auto;
+}
+
+.col-9 {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+}
+
+.first-section {
+  width: 100%; /* Full width */
+  height: 450px; /* Fixed height */
+  flex-direction: column;
+  overflow-y: auto; /* Enables vertical scrollbar if content overflows */
+  overflow-x: hidden; /* Hides horizontal overflow */
+}
+
+.second-section {
+  width: 100%; /* Full width */
+  padding: 20px;
+  height: 200px; /* Fixed height */
+  border-radius: 5px;
+}
+
+.example-container1 {
+  height: 420px;
+  max-width: 100%;
+  overflow: auto;
+}
+
+
+.accordion {
+  max-width: 100%;
+  height: 460px;
+  margin: auto;
+  font-family: Arial, sans-serif;
+  overflow-y: auto; /* Enables vertical scrollbar if content overflows */
+  overflow-x: hidden; /* Hides horizontal overflow */
+}
+
+.accordion-item {
+  margin-bottom: 15px;
+}
+
+.accordion-item label{
+font-size: 20px;
+font-weight: 600;
+font-family: 'Playfair Display', serif;
+}
+
+.accordion-header {
+  display: block;
+  padding: 10px;
+  background-color: #FFFBEE;
+  cursor: pointer;
+  font-size: 18px;
+  text-align: left;
+  position: relative;
+}
+
+.accordion-header span {
+  position: absolute;
+  right: 10px;
+  transition: transform 0.3s ease;
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background-color: #F5F0E1;
+  border: 1px solid #F5F0E1;
+  border-radius: 5px;
+}
+
+.accordion-content p {
+  padding: 5px 7px 15px 15px ;
+}
+
+/* Hide radio buttons */
+input[type="radio"] {
+  display: none;
+}
+
+/* Expand content when checked */
+input[type="radio"]:checked + label + .accordion-content {
+  max-height: 100px; /* Adjust based on content height */
+}
+
+/* Rotate arrow when content is open */
+input[type="radio"]:checked + label span {
+  transform: rotate(180deg);
+}

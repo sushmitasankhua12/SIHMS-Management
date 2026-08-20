@@ -1,0 +1,79 @@
+<app-header></app-header>
+<div class="content">
+  <div class="main-tab">
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a routerLink="/application/Studentmanage" routerLinkActive="active" class="nav-link active color1">Add Student</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/application/Studentmanageview" routerLinkActive="active" class="nav-link color1">View Student Data</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="row col-lg-10 mt-1">
+    <div class="col-lg-4 col-xxl-4">
+      <div class="mb-xl-3">
+          <label class="form-label">Name<span class="text-danger">*</span></label>
+          <input class="form-control" type="text" placeholder="Enter Full Name" autocomplete="off" id="fullname" maxlength="40">
+      </div>
+    </div>
+    <div class="col-lg-4 col-xxl-4">
+      <div class="mb-xl-3">
+          <label class="form-label">Mobile No<span class="text-danger"></span></label>
+          <input class="form-control" type="text" placeholder="Enter Mobile No" autocomplete="off" id="mobile" maxlength="12"
+          onkeyup="this.value=this.value.replace(/[^0-9. ]/g,'');" >
+      </div>
+    </div>
+    <div class="col-lg-4 col-xxl-4">
+      <div class="mb-xl-3">
+          <label class="form-label">MailId<span class="text-danger"></span></label>
+          <input class="form-control" type="text" placeholder="Enter MailId" autocomplete="off" id="mailid" maxlength="70">
+      </div>
+    </div>
+    <div class="col-lg-4 col-xxl-4">
+      <div class="mb-xl-3">
+          <label class="form-label">Patent Name<span class="text-danger">*</span></label>
+          <input class="form-control" type="text" placeholder="Enter Patent Name" autocomplete="off" id="pfullname" maxlength="40">
+      </div>
+    </div>
+    <div class="col-lg-4 col-xxl-4">
+      <div class="mb-xl-3">
+          <label class="form-label">Parent Mobile No<span class="text-danger">*</span></label>
+          <input class="form-control" type="text" placeholder="Enter Parent Mobile No" autocomplete="off" id="pmobile" maxlength="12"
+          onkeyup="this.value=this.value.replace(/[^0-9. ]/g,'');" >
+      </div>
+    </div>
+    <div class="col-lg-4 col-xxl-4">
+      <div class="mb-xl-3">
+          <label class="form-label">Parent MailId<span class="text-danger">*</span></label>
+          <input class="form-control" type="text" placeholder="Enter Parent MailId" autocomplete="off" id="pmailid" maxlength="70">
+      </div>
+    </div>
+    <div class="col-lg-4 col-xxl-4">
+      <div class="mb-xl-3">
+          <label class="form-label">Address<span class="text-danger">*</span></label>
+          <textarea class="form-control" type="text" placeholder="Enter Address" autocomplete="off" id="address" maxlength="300"></textarea>
+      </div>
+    </div>
+    <div class="col-lg-4 col-xxl-4">
+      <div class="mb-xl-3">
+          <label class="form-label">Class<span class="text-danger">*</span></label>
+          <select class="form-select" name="class" id="class" >
+            <option value="" selected disabled>Select Class</option>
+            <ng-container *ngFor="let item of classlist">
+                <option value={{item.classId}}>{{item.className}}</option>
+            </ng-container>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-4 col-xxl-4" style="margin-top: 30px;">
+      <input type="button" value="Save" class="btn btn-success me-2" style="width: 48%;" (click)="submit()">
+      <input type="button" value="Reset" class="btn btn-info" style="width: 48%;" (click)="resetVal()">
+    </div>
+    <div class="col-lg-4 col-xxl-4"  >
+      <p class="madotory" >(*) Indicate mandatory</p>
+    </div>
+  </div>
+</div>

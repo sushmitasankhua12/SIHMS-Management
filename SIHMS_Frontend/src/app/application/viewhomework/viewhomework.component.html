@@ -1,0 +1,76 @@
+<app-header></app-header>
+<div class="content">
+  <div class="main-tab">
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a routerLink="/application/assignHomework" routerLinkActive="active" class="nav-link color1">Asign HomeWork</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/application/individualHomework" routerLinkActive="active" class="nav-link color1">Individual Asign HomeWork</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/application/viewHomework" routerLinkActive="active" class="nav-link active color1">View </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row col-lg-10 mt-1">
+    <div class="col-lg-3 col-xxl-3">
+      <div class="mb-xl-3">
+        <label class="form-label">Class<span class="text-danger"></span></label>
+        <select class="form-select" name="class" id="class" (change)="onChangeClass($event)">
+          <option value="" selected disabled>Select Class</option>
+          <ng-container *ngFor="let item of classlist">
+              <option value={{item.classId}}>{{item.className}}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xxl-3">
+      <div class="mb-xl-3">
+        <label class="form-label">Student<span class="text-danger"></span></label>
+        <select class="form-select" name="student" id="student">
+          <option value="" selected disabled>Select Student</option>
+          <ng-container *ngFor="let item of studentlist">
+            <option value={{item.studentId}}>{{item.studentName}}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-2 col-xxl-2">
+      <div class="mb-xl-3">
+        <input type="button" value="Search" class="btn btn-primary me-2" style="width: 100%; margin-top: 30px;" (click)="search()">
+      </div>
+    </div>
+  </div>
+
+    <div class="table-container example-container">
+      <table class="custom-table">
+        <caption></caption>
+        <thead>
+          <tr>
+            <th>Class</th>
+            <th>Student Name</th>
+            <th>Assigned Date</th>
+            <th>Due Date</th>
+            <th style="width: 525px;">Homework / Assignment</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let schclass of homeworklist">
+            <td>{{ schclass.class }}</td>
+            <td>{{ schclass.student}}</td>
+            <td>{{ schclass.submitdate }}</td>
+            <td>{{ schclass.duedate }}</td>
+            <td>{{ schclass.homework}}</td>
+          </tr>
+          <tr *ngIf="homeworklist?.length==0">
+            <td colspan="10" style="text-align:center;"><strong class="text-danger">No data found</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</div>

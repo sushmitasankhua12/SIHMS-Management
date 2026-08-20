@@ -1,0 +1,102 @@
+<app-header></app-header>
+
+<div class="watermark"></div>
+
+ <div class="content" *ngIf="user?.groupId == 1">
+  <div class="row">
+    <div class="col-3 border-end">
+      <p class="titel">Direct Link</p>
+      <div class="mt-2" >
+        <div class="card-container" routerLink="/application/Studentmanageview">
+          <div class="icon">
+            <i class="bi bi-people"></i>
+          </div>
+          <div class="content1">
+            <h2>Student Data</h2>
+          </div>
+          <div class="arrow">
+            <i class="bi bi-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4" >
+        <div class="card-container" routerLink="/application/viewHomework">
+          <div class="icon">
+            <i class="bi bi-pencil-square"></i>
+          </div>
+          <div class="content1">
+            <h2>Asign Homework</h2>
+          </div>
+          <div class="arrow">
+            <i class="bi bi-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4" >
+        <div class="card-container" routerLink="/application/scheduleclass">
+          <div class="icon">
+            <i class="bi bi-calendar-check"></i>
+          </div>
+          <div class="content1">
+            <h2>Schedule Class</h2>
+          </div>
+          <div class="arrow">
+            <i class="bi bi-arrow-right"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-9 d-flex">
+      <p class="titel" style="padding: 0 0 0 10px; text-align: left;">Upcoming Scheduled Classes</p>
+      <div class="first-section">
+        <div class="row " >
+          <div class="col-4 " *ngFor="let data of scheduleclass">
+            <div class="card shadow-sm" style="margin-bottom: 3ch;">
+                <div class="card-body " style="padding: 2px 5px 0 15px;">
+                  <h3 style="color: #a82323;">{{data.class}}</h3>
+                  <p style="font-weight: 600;"><i class="bi bi-clock me-2" style="color: #a82323;"></i><span style="color: rgb(18, 153, 18);">{{data.fromtime}}</span> - <span style="color: rgb(233, 27, 27);">{{data.totime}}</span></p>
+                  <p style="margin-top: -1ch; font-weight: 600; color: #a82323;">Date : {{data.date}}</p>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="content" *ngIf="user?.groupId == 2">
+  <div class="row">
+    <div class="col-5 border-end">
+        <p class="titel" style="padding: 0 0 0 10px; text-align: left;">Upcoming Scheduled Classes</p>
+        <div class="first-section">
+          <div class="row " >
+            <div class="col-6 " *ngFor="let data of scheduleclass">
+              <div class="card shadow-sm" style="margin-bottom: 3ch;">
+                <div class="card-body " style="padding: 2px 5px 0 15px;">
+                  <h3 style="color: #a82323;">{{data.class}}</h3>
+                  <p style="font-weight: 600;"><i class="bi bi-clock me-2" style="color: #a82323;"></i><span style="color: rgb(18, 153, 18);">{{data.fromtime}}</span> - <span style="color: rgb(233, 27, 27);">{{data.totime}}</span></p>
+                  <p style="margin-top: -1ch; font-weight: 600; color: #a82323;">Date : {{data.date}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-7">
+      <p class="titel" style="padding: 0 0 0 10px; text-align: left;">Asigned Homework</p>
+      <div class="accordion">
+        <ng-container *ngFor="let data of homework , index as i">
+          <div class="accordion-item">
+            <input type="radio" id="{{'question'+i+1}}" name="accordion" [checked]="i==0">
+            <label for="{{'question'+i+1}}" class="accordion-header">Question {{i+1}} <p style="color: #a82323;">Duedate : {{data.duedate}} <span>&#9660;</span></label>
+            <div class="accordion-content">
+                <p>{{data.homework}}</p>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+

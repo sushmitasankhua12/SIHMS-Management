@@ -1,0 +1,51 @@
+<app-header></app-header>
+<div class="content">
+  <div class="main-tab">
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a routerLink="/application/assignHomework" routerLinkActive="active" class="nav-link active color1">Asign HomeWork</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/application/individualHomework" routerLinkActive="active" class="nav-link color1">Individual Asign HomeWork</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/application/viewHomework" routerLinkActive="active" class="nav-link color1">View </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row col-lg-10 mt-1">
+    <div class="col-lg-3 col-xxl-3">
+      <div class="mb-xl-3">
+        <label class="form-label">Class<span class="text-danger">*</span></label>
+        <select class="form-select" name="class" id="class">
+          <option value="" selected disabled>Select Class</option>
+          <ng-container *ngFor="let item of classlist">
+              <option value={{item.classId}}>{{item.className}}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xxl-3">
+      <div class="mb-xl-3">
+          <label class="form-label">Submit Date<span class="text-danger">*</span></label>
+          <input class="form-control" type="date" placeholder="Enter Mobile No" autocomplete="off" id="submitdate" >
+      </div>
+    </div>
+    <div class="col-lg-12 col-xxl-12">
+      <div class="mb-xl-3">
+        <label  class="form-label">Assignment / Homework<span class="text-danger">*</span></label>
+        <textarea class="form-control" style="height: 200px;" placeholder="Enter Here...." autocomplete="off" id="homework" maxlength="3000"></textarea>
+      </div>
+    </div>
+    <div class="col-lg-4 col-xxl-4">
+      <div class="mb-xl-3">
+        <input type="button" value="Save" class="btn btn-success me-2" style="width: 48%;" (click)="submit()">
+        <input type="button" value="Reset" class="btn btn-info" style="width: 48%;" (click)="resetVal()">
+      </div>
+    </div>
+  </div>
+
+</div>

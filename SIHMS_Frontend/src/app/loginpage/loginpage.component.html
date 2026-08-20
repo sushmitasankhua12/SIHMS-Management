@@ -1,0 +1,124 @@
+
+<div class="login-wrapp">
+  <div class="container">
+    <div class="row">
+        <div class="col-xl-12 col-xxl-12">
+            <div class="login-box  shadow mx-xxl-3 p-4 p-xxl-5" style="background-color: rgba(211, 211, 211, 0.7);">
+              <div class="row justify-content-center align-items-center h-100" style="margin-bottom: 2ch;">
+                <div class="col-lg-7 col-md-6 col-sm-12">
+                  <div class="right-image wow fadeInRight" data-wow-duration="1s" data-wow-delay="0.5s">
+                    <img src="../../assets/img/schoolside.jpg" alt="" class="responsive-image">
+                  </div>
+                </div>
+                <div class="watermark-container col-lg-5 col-md-6 col-sm-12" >
+                  <h2 style="font-family: 'Playfair Display', serif; margin-top: -2ch; font-weight: 600; font-size: 35px;">Student Information & Homework Management System</h2>
+                        <div class="row" >
+                          <div class="col-lg-1 col-md-2 col-sm-2"><h2><i class="bi bi-person-fill"></i></h2></div>
+                          <div class="col-lg-11 col-md-10 col-sm-10"><input type="text" class="form-control usertext userinput" id="username" maxlength="50" autocomplete="off"
+                            name="userInput" placeholder="Enter ID">
+                          </div>
+                        </div>
+                        <div class="row" >
+                          <div class="col-lg-1 col-md-2 col-sm-2"><h2><i class="bi bi-key-fill"></i></h2></div>
+                          <div class="col-lg-11 col-md-10 col-sm-10"><input type="text" class="form-control usertext userinput" id="password" maxlength="20" autocomplete="off"
+                            name="userInput" placeholder="Enter Password">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-lg-1 col-md-2 col-sm-2"></div>
+                          <div class="col-lg-7 col-md-4 col-sm-4"><input type="text" class="form-control usertext userinput" id="capt" maxlength="20" autocomplete="off"
+                            name="userInput" placeholder="Enter Captcha">
+                          </div>
+                          <div class="col-lg-2 col-md-4 col-sm-4">
+                             <div class="captchabox"><b>
+                             <div class="captchaimg capt" id="loginCaptchaImg" disabled >
+                              </div></b>
+                            </div>
+                          </div>
+                          <div class="col-lg-1 col-md-2 col-sm-2" (click)="captref()"><h3><i class="bi bi-arrow-clockwise"></i></h3></div>
+                        </div>
+
+                      <div class="container col d-grid mt-3" >
+                        <a class="btn btn-primary px-xl-4 py-xl-2" style="border-radius: 20px 5px 20px 5px;" (click)="onLoggedIn()"
+                            id="loginBtn">Login</a>
+                            <p style="margin-top: 1ch; font-weight: 500; color:rgb(92, 92, 92)">Copyright © 2025 SIHMSystem. All Rights Reserved.</p>
+                      </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="changepassword" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="backdrop-filter: blur(10px); ">
+  <div class="modal-dialog" style="max-width: 40%; margin-top: 100px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 style="font-weight: 500;color: #388087">Change Password</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closemodal()"></button>
+      </div>
+      <div class="modal-body container text-center">
+        <div class="row">
+          <div class="col-lg-12 col-xxl-12" style="margin-left: 1ch;text-align: left;"
+            *ngIf="!sentotp">
+            <p style="margin-top: -1ch;">Your new password must be at least <span style="color: #8f0505;">8 characters</span> long and include:</p>
+            <p style="margin-top: -2ch; margin-left: 1ch;">* At least one uppercase letter <span style="color: #8f0505;">(A-Z)</span></p>
+            <p style="margin-top: -2ch; margin-left: 1ch;">* At least one lowercase letter <span style="color: #8f0505;">(a-z)</span></p>
+            <p style="margin-top: -2ch; margin-left: 1ch;">* At least one number <span style="color: #8f0505;">(0-9)</span></p>
+            <p style="margin-top: -2ch; margin-left: 1ch;">* At least one special character <span style="color: #8f0505;">(e.g., @, #, $)</span>"</p>
+            <p style="margin-top: -2ch;">🔒 For your security, avoid using easily guessed words like your name or birthdate.</p>
+          </div>
+          <div class="col-lg-5 col-xxl-5 mt-1 ">
+            <div class="mb-xl-3">
+              <label class="form-label">Enter New Paasword<span class="text-danger">*</span></label>
+            </div>
+          </div>
+          <div class="col-lg-7 col-xxl-7">
+            <input class="form-control" type="text" placeholder="Enter New Paasword" autocomplete="off" id="newpass"
+            maxlength="15" onkeyup="this.value=this.value.replace(/[^a-zA-Z0-9@#&]/g,'');" [disabled]="sentotp" >
+          </div>
+          <div class="col-lg-5 col-xxl-5 mt-1">
+            <div class="mb-xl-3">
+              <label class="form-label">Enter Confirm Paasword<span class="text-danger">*</span></label>
+            </div>
+          </div>
+          <div class="col-lg-7 col-xxl-7">
+            <div class="mb-xl-3">
+              <input class="form-control" type="text" placeholder="Enter New Paasword" autocomplete="off" id="cnfpass"
+                maxlength="15" onkeyup="this.value=this.value.replace(/[^a-zA-Z0-9@#&]/g,'');" [disabled]="sentotp">
+            </div>
+          </div>
+          <ng-container *ngIf="sentotp">
+            <div class="col-lg-1 col-xxl-1"></div>
+            <div class="col-lg-3 col-xxl-3 mt-2">
+              <p class="paydata color1">Enter OTP : </p>
+            </div>
+            <div class="col-lg-6 col-xxl-6 mt-2">
+              <input class="form-control" type="text" placeholder="Enter here..." autocomplete="off" id="otpval"
+                maxlength="6" onkeyup="this.value=this.value.replace(/[^0-9. ]/g,'');">
+            </div>
+            <div class="col-lg-2 col-xxl-2"></div>
+          </ng-container>
+          <div class="col-lg-12 col-xxl-12" style="margin-left: 1ch; margin-top: 1ch; text-align: left;"
+            *ngIf="sentotp">
+            <p>* We've sent an OTP to your registered email ID.</p>
+            <!-- <p style="margin-top: -1ch;">* An OTP has also been sent to your registered ****6789 mobile number.</p> -->
+            <p style="margin-top: -1ch;">* You have {{attemptcount}} attempts remaining to verify your account.</p>
+          </div>
+          <div class="col-lg-12 col-xxl-12 mt-4" *ngIf="!sentotp">
+            <button class="btn btn-success w-50 me-2" (click)="sendOTP()">Send OTP</button>
+          </div>
+          <div class="col-lg-12 col-xxl-12 mt-4 d-flex justify-content-center" *ngIf="sentotp">
+            <button class="btn btn-primary mx-2" style="width: 120px;" (click)="sendOTP()">Re-Send</button>
+            <button class="btn btn-success mx-2" style="width: 120px;" (click)="verifyOTP()">Verify</button>
+            <button class="btn btn-warning mx-2" style="width: 120px;" (click)="closemodal()">Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,150 @@
+.login-wrapp {
+  background: #ffffff url(../../assets/img/loginbg.jpg) center;
+  background-size: cover;
+  width: 100vw; /* Full width for both mobile and desktop */
+  height: 100vh; /* Full height for both mobile and desktop */
+  display: flex; /* To center content inside */
+  justify-content: center; /* Horizontal center */
+  align-items: center; /* Vertical center */
+}
+
+.login-wrapp .right-image img {
+  max-width: 100%;
+  border-radius: 20px;
+}
+
+.login-wrapp .left-content .white-button a {
+  background-color: #388087;
+  color: #fff !important;
+}
+
+.login-box {
+  border-radius: 2rem;
+
+  // h2{
+  //   font-family: 'Playfair Display', serif;
+  //   margin-top: -4ch;
+  //   font-weight: 500;
+  //   font-size: 35px;
+  // }
+
+  .iconinput {
+    position: relative;
+
+    &>i {
+      position: absolute;
+      top: 0.4rem;
+      left: .8rem;
+  }
+
+  &.password {
+      i {
+          font-size: 1.4rem;
+          top: 0.7rem;
+      }
+  }
+
+    a {
+      &.enablebtn {
+          position: absolute;
+          padding: 0 .5rem;
+          right: 0.5rem;
+          top: 0.5rem;
+      }
+  }
+  }
+}
+
+.download-app {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically (if necessary) */
+  gap: 20px; /* Optional: Add space between the two images */
+  margin-top: 2ch;
+}
+
+.download-app img {
+  width: 150px; /* Ensure images are responsive */
+  height: auto;
+}
+
+.download-app img:hover {
+  width: 160px; /* Ensure images are responsive */
+  height: auto;
+}
+
+.gogle:hover{
+  background-color: rgb(241, 241, 240);
+}
+
+#google-signin-btn {
+  width: 100%;
+  margin-top: 1ch;
+}
+
+
+/* Tab styles */
+.tab {
+  padding-bottom: 15px;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.tab h5 {
+  margin: 0;
+  color: #5e5d5d;
+  position: relative;
+}
+
+/* Active tab underline */
+.active-tab h5 {
+  color: #388087; /* Change text color when active */
+}
+
+.active-tab h5::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #388087; /* Underline color */
+}
+
+
+.watermark-container {
+  position: relative;
+  padding: 20px;
+  // background: white;
+  // border: 1px solid #ddd;
+  // border-radius: 8px;
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+/* Watermark Image */
+.watermark-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200px; /* Adjust the watermark size */
+  height: 200px;
+  background: url(../../assets/img/logo.png) no-repeat center center;
+  background-size: contain;
+  opacity: 0.3; /* Makes the image light */
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+/* Ensures Text is Highlighted */
+.watermark-container h2,
+.watermark-container p {
+  position: relative;
+  z-index: 2;
+  color: black; /* Ensures text remains visible */
+  font-weight: bold;
+}
+

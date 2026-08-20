@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="content">
+  <div class="main-tab">
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a routerLink="/application/Studentmanage" routerLinkActive="active" class="nav-link  color1">Add Student</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="/application/Studentmanageview" routerLinkActive="active" class="nav-link active color1">View Student Data</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-md-10 row mt-2">
+    <div class="row">
+      <ng-container *ngFor="let record of classlist">
+          <div class="col-md-4 mt-4" (click)="getstudentdata(record?.classId)">
+            <div class="card-container">
+              <!-- Left Side Icon -->
+              <div class="icon">
+                <i class="bi bi-book"></i>
+              </div>
+              <!-- Text Content -->
+              <div class="content1">
+                <h2>{{record?.className}}</h2>
+                <p>No. of Students: {{record?.count}}</p>
+              </div>
+              <!-- Right Side Arrow -->
+              <div class="arrow">
+                <i class="bi bi-arrow-right"></i>
+              </div>
+            </div>
+          </div>
+      </ng-container>
+    </div>
+  </div>
+
+  </div>
+
+
+  <div class="modal" id="studentdetails" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+          style="backdrop-filter: blur(10px); ">
+  <div class="modal-dialog" style="max-width: 85%; margin-top: 100px;">
+    <div class="modal-content login-wrapp">
+      <div class="modal-header">
+        <h3 style="font-weight: 500;color: #a82323">Student Details</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+          (click)="closemodal()"></button>
+      </div>
+      <div class="modal-body container text-center">
+        <div class="table-container example-container">
+          <table class="custom-table">
+            <caption></caption>
+            <thead>
+              <tr>
+                <th>Student Details</th>
+                <th>Parent Details</th>
+                <th>Address</th>
+                <!-- <th>Action</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let schclass of studentdata">
+                <td>
+                  <p style="font-weight: 600; font-size: 20px;">{{ schclass.studentName }}</p>
+                  <p style="margin-top: -2ch;"><i class="bi bi-telephone-fill me-2"  style="color: #a82323;"></i>{{ schclass.phoneNo }}</p>
+                  <p style="margin-top: -2ch;"><i class="bi bi-envelope-at-fill me-2"  style="color: #a82323;"></i>{{ schclass.mailId }}</p>
+                </td>
+                <td>
+                  <p style="font-weight: 600; font-size: 20px;">{{ schclass.parentName }}</p>
+                  <p style="margin-top: -2ch;"><i class="bi bi-telephone-fill me-2" style="color: #a82323;"></i>{{ schclass.parentMobile }}</p>
+                  <p style="margin-top: -2ch;"><i class="bi bi-envelope-at-fill me-2"  style="color: #a82323;"></i>{{ schclass.parentMail }}</p>
+                </td>
+                <td>{{ schclass.address}}</td>
+              </tr>
+              <tr *ngIf="studentdata?.length==0">
+                <td colspan="10" style="text-align:center;"><strong class="text-danger">No data found</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

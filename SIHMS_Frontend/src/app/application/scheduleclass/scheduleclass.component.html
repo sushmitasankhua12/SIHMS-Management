@@ -1,0 +1,102 @@
+<app-header></app-header>
+<div class="content">
+  <div class="main-tab">
+    <div class="col-lg-12">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a routerLink="/application/scheduleclass" routerLinkActive="active" class="nav-link active color1">Schedule Class</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row col-lg-10 mt-1">
+    <div class="col-lg-3 col-xxl-3">
+      <div class="mb-xl-3">
+        <label class="form-label">Class<span class="text-danger">*</span></label>
+        <select class="form-select" name="class" id="class">
+          <option value="" selected disabled>Select Class</option>
+          <ng-container *ngFor="let item of classlist">
+              <option value={{item.classId}}>{{item.className}}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    <div class="col-lg-3 col-xxl-3">
+      <div class="mb-xl-3">
+          <label class="form-label">Schedule Date<span class="text-danger">*</span></label>
+          <input class="form-control" type="date" placeholder="Enter Mobile No" autocomplete="off" id="submitdate" >
+      </div>
+    </div>
+    <div class="col-lg-6 col-xxl-6"></div>
+    <div class="col-lg-3 col-xxl-3">
+      <div class="mb-xl-3">
+          <label class="form-label">From time<span class="text-danger">*</span></label>
+          <input class="form-control" type="time" autocomplete="off" id="fromtime" >
+      </div>
+    </div>
+    <div class="col-lg-3 col-xxl-3">
+      <div class="mb-xl-3">
+          <label class="form-label">To time<span class="text-danger">*</span></label>
+          <input class="form-control" type="time" autocomplete="off" id="totime" >
+      </div>
+    </div><div class="col-lg-6 col-xxl-6"></div>
+    <div class="col-lg-4 col-xxl-4">
+      <div class="mb-xl-3">
+        <input type="button" value="Save" class="btn btn-success me-2" style="width: 48%;" (click)="submit()">
+        <input type="button" value="Reset" class="btn btn-info" style="width: 48%;" (click)="resetVal()">
+      </div>
+    </div>
+  </div>
+  <hr>
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a routerLink="/application/scheduleclassview" routerLinkActive="active" class="nav-link active color1">View</a>
+    </li>
+  </ul>
+  <div class="row col-lg-10 mt-1">
+    <div class="col-lg-3 col-xxl-3">
+      <div class="mb-xl-3">
+          <label class="form-label">Schedule Date<span class="text-danger">*</span></label>
+          <input class="form-control" type="date" placeholder="Enter Mobile No" autocomplete="off" id="fromdate" >
+      </div>
+    </div>
+    <div class="col-lg-3 col-xxl-3">
+      <div class="mb-xl-3">
+          <label class="form-label">Schedule Date<span class="text-danger">*</span></label>
+          <input class="form-control" type="date" placeholder="Enter Mobile No" autocomplete="off" id="todate" >
+      </div>
+    </div>
+    <div class="col-lg-2 col-xxl-2">
+      <div class="mb-xl-3">
+        <input type="button" value="Save" class="btn btn-primary" style="margin-top: 30px; width: 100%;" (click)="search()">
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container example-container">
+    <table class="custom-table">
+      <caption></caption>
+      <thead>
+        <tr>
+          <th>Class</th>
+          <th>Date</th>
+          <th>Time From</th>
+          <th>Time To</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let schclass of scheduledclass">
+          <td>{{ schclass.className }}</td>
+          <td>{{schclass.date}}</td>
+          <td>{{ schclass.fromtime }}</td>
+          <td>{{ schclass.tptime }}</td>
+        </tr>
+        <tr *ngIf="scheduledclass?.length==0">
+          <td colspan="10" style="text-align:center;"><strong class="text-danger">No data found</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
